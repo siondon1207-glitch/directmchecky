@@ -1,23 +1,764 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
+
+
+    <!-- JSON-LD 구조화 데이터: 네이버 AI 탭 및 검색엔진 최적화 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "2026 현대 그랜저 (GN7)",
+      "image": "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=800&q=80",
+      "description": "2026년형 현대자동차 디 올 뉴 그랜저(GN7) 가솔린, 하이브리드, LPi 모델의 트림별 공식 출시 가격과 세금 및 금융 구매 방식 비교 분석 자료입니다.",
+      "brand": {
+        "@type": "Brand",
+        "name": "현대자동차"
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "KRW",
+        "lowPrice": "37680000",
+        "highPrice": "53560000",
+        "offerCount": "16"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "그랜저 가솔린과 하이브리드의 가격 차이는 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026년형 그랜저 기준, 동일 트림에서 하이브리드 모델이 가솔린 2.5 모델보다 약 500만원에서 550만원가량 높게 책정되어 있습니다. 다만 하이브리드의 높은 연비와 세제 혜택을 고려하면 연간 1.5만km 이상 주행 시 약 3~4년 이내에 초기 비용 차액을 회수할 수 있습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "그랜저 신차 구매 시 발생하는 취등록세 계산 방법은 어떻게 되나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "일반 승용차인 그랜저는 차량 순수 가격(옵션 포함)의 7퍼센트가 취등록세로 부과됩니다. 단, 하이브리드 모델의 경우 친환경차 감면 혜택이 적용되어 일정 부분 감면을 받은 후의 금액이 최종 부과됩니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        /* CSS 변수를 활용한 현대적이고 고급스러운 색감 설계 */
+        :root {
+            --bg-main: #f9fafb;
+            --container-bg: #ffffff;
+            --primary: #1e293b; /* 깊이 있는 다크 네이비 */
+            --primary-light: #334155;
+            --secondary: #b9935a; /* 프리미엄 골드 브론즈 */
+            --accent: #0f172a;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --highlight: #f8fafc;
+            --success: #10b981;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            line-height: 1.8;
+            color: var(--text-main);
+            background-color: var(--bg-main);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 헤더 디자인: 미니멀하면서 품격 있는 가독성 확보 */
+        header {
+            background-color: var(--primary);
+            color: #ffffff;
+            padding: 50px 0;
+            text-align: center;
+            border-bottom: 4px solid var(--secondary);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            color: #ffffff;
+        }
+        header p {
+            margin: 15px 0 0 0;
+            font-size: 1.1rem;
+            color: var(--border);
+            font-weight: 300;
+        }
+
+        /* 내비게이션 바 */
+        nav {
+            background-color: var(--container-bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav ul li a {
+            display: block;
+            padding: 15px 25px;
+            text-decoration: none;
+            color: var(--primary-light);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease-in-out;
+        }
+        nav ul li a:hover {
+            color: var(--secondary);
+            background-color: var(--highlight);
+        }
+
+        /* 레이아웃 구조 */
+        .content-wrap {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .main-content {
+            background-color: var(--container-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .sidebar-widget {
+            background-color: var(--container-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        /* 타이포그래피 요소 */
+        h2 {
+            font-size: 1.7rem;
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.35rem;
+            color: var(--primary-light);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-left: 4px solid var(--secondary);
+            padding-left: 12px;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* 핵심 하이라이트 박스 */
+        .highlight-box {
+            background-color: var(--highlight);
+            border-left: 4px solid var(--primary);
+            padding: 25px;
+            border-radius: 0 8px 8px 0;
+            margin: 30px 0;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+        .highlight-box strong {
+            color: var(--primary);
+        }
+
+        /* 테이블 디자인 */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 25px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        table th, table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        table th {
+            background-color: var(--primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+        table tr:last-child td {
+            border-bottom: none;
+        }
+        table tr:nth-child(even) {
+            background-color: var(--highlight);
+        }
+
+        /* 사용자 대화형 입력 폼 (체류시간 증대용 시뮬레이터) */
+        .interactive-form {
+            background-color: #f8fafc;
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 35px 0;
+        }
+        .interactive-form h3 {
+            margin-top: 0;
+            border-left: 4px solid var(--primary);
+            color: var(--primary);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--primary-light);
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            box-sizing: border-box;
+            background-color: #ffffff;
+            font-size: 0.95rem;
+            color: var(--text-main);
+            transition: border-color 0.2s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        .btn-submit {
+            display: inline-block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-submit:hover {
+            background-color: var(--primary-light);
+        }
+        .calc-result-box {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            border: 1px dashed var(--border);
+        }
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        .result-row:last-child {
+            margin-bottom: 0;
+            font-weight: 700;
+            border-top: 1px solid var(--border);
+            padding-top: 10px;
+            color: var(--primary);
+        }
+
+        /* 목록 스타일 */
+        ul.styled-list {
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+        ul.styled-list li {
+            margin-bottom: 12px;
+            position: relative;
+            list-style-type: square;
+        }
+
+        /* 외부 참고 문서 */
+        .external-links {
+            background-color: #f1f5f9;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        .external-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0 0;
+        }
+        .external-links li {
+            margin-bottom: 12px;
+        }
+        .external-links a {
+            color: var(--primary-light);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        .external-links a:hover {
+            color: var(--secondary);
+        }
+
+        /* 반응형 레이아웃 대응 */
+        @media (max-width: 992px) {
+            .content-wrap {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                order: 2;
+            }
+            .main-content {
+                order: 1;
+                padding: 25px;
+            }
+            header h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>디 올 뉴 그랜저 가격표 분석: 2026년형 옵션 및 실구매 비용 가이드</h1>
+            <p>가솔린, 하이브리드, LPi 트림별 세금 포함 최종 견적 및 장단점 심층 비교</p>
+        </div>
+    </header>
+
     <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
+        <ul>
+            <li><a href="#section1">트림별 공식 가격표</a></li>
+            <li><a href="#section2">하이브리드 비용 시뮬레이션</a></li>
+            <li><a href="#section3">옵션 조합 추천 및 장단점</a></li>
+            <li><a href="#section4">세금 및 유지비 계산법</a></li>
+            <li><a href="#section5">커뮤니티 및 업계 구매 분석</a></li>
+        </ul>
     </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+    <div class="container">
+        <div class="content-wrap">
+            
+            <main class="main-content">
+                <section id="intro">
+                    <h2>2026년형 현대 그랜저 가격 체계와 시장 동향</h2>
+                    <p>현대자동차의 대표 준대형 세단인 그랜저(GN7)는 품격 있는 디자인과 첨단 편의 사양을 바탕으로 국내 신차 판매 순위에서 늘 최상위권을 유지하고 있습니다. 특히 친환경 및 고연비 차량에 대한 선호도가 날로 높아짐에 따라 그랜저 하이브리드 가격에 대한 관심이 어느 때보다 높습니다. 신차를 구매할 때 단순히 제조사 공식 홈페이지에 기재된 기본 차량 가격만 생각했다가 취등록세, 각종 공채 매입 비용, 탁송료 및 탁송 보험료, 그리고 선택 사양을 추가하면서 예상했던 금액보다 수백만 원 이상 초과하는 경험을 하곤 합니다.</p>
+                    
+                    <p>본 가이드에서는 2026년형 그랜저의 가솔린 2.5, 가솔린 3.5, LPi 3.5 그리고 1.6 터보 하이브리드 등 엔진 종류에 따른 상세 출시 가격을 상세히 분석합니다. 또한 프리미엄, 익스클루시브, 캘리그래피, 블랙잉크 등 세부 트림에 따른 옵션 구성과 장단점을 살펴보며, 어떤 금융 방식을 선택하는 것이 가장 저렴한지 다이렉트 견적 비교 노하우까지 전문적으로 다루어 최적의 의사결정을 도와드립니다.</p>
+                </section>
+
+                <section id="section1">
+                    <h2>1. 2026년형 그랜저 엔진 및 트림별 공식 가격표</h2>
+                    <p>그랜저는 고객의 주행 패턴에 맞게 폭넓은 엔진 라인업을 제공합니다. 아래 가격표는 기본 품목 사양 기준이며, 선택 품목을 추가하지 않은 순수 차량 가액입니다. 연식 변경을 거치면서 지능형 안전 기술과 최신 인포테인먼트 사양이 대거 기본화된 것이 특징입니다.</p>
+                    
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>엔진 형식</th>
+                                    <th>세부 트림</th>
+                                    <th>공식 출시 가격</th>
+                                    <th>주요 기본 사양 및 요약</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2.5 가솔린</td>
+                                    <td>프리미엄 (Premium)</td>
+                                    <td>37,680,000 원</td>
+                                    <td>Smartstream 2.5 엔진, 8단 자동변속기, 9 에어백 시스템, 12.3인치 내비게이션</td>
+                                </tr>
+                                <tr>
+                                    <td>2.5 가솔린</td>
+                                    <td>익스클루시브 (Exclusive)</td>
+                                    <td>42,580,000 원</td>
+                                    <td>서라운드 뷰 모니터, 후측방 모니터, 운전석 에르고 모션 시트, 스마트 전동식 트렁크</td>
+                                </tr>
+                                <tr>
+                                    <td>2.5 가솔린</td>
+                                    <td>캘리그래피 (Calligraphy)</td>
+                                    <td>46,380,000 원</td>
+                                    <td>캘리그래피 전용 외관 디자인, 나파가죽 시트, 헤드업 디스플레이, 퀼팅 패턴 내장</td>
+                                </tr>
+                                <tr>
+                                    <td>1.6 터보 하이브리드</td>
+                                    <td>프리미엄 (Premium)</td>
+                                    <td>42,980,000 원</td>
+                                    <td>1.6T-GDI 하이브리드 엔진, 6단 자동변속기, 구동모터, 회생제동 시스템</td>
+                                </tr>
+                                <tr>
+                                    <td>1.6 터보 하이브리드</td>
+                                    <td>익스클루시브 (Exclusive)</td>
+                                    <td>47,880,000 원</td>
+                                    <td>프리미엄 기본 사양 외 운전석 자세 메모리 시스템, 동승석 워크인 디바이스 추가</td>
+                                </tr>
+                                <tr>
+                                    <td>1.6 터보 하이브리드</td>
+                                    <td>캘리그래피 (Calligraphy)</td>
+                                    <td>51,680,000 원</td>
+                                    <td>순정 헤드업 디스플레이, BOSE 프리미엄 사운드 시스템, 모노블록 브레이크</td>
+                                </tr>
+                                <tr>
+                                    <td>3.5 LPi</td>
+                                    <td>프리미엄 (Premium)</td>
+                                    <td>39,180,000 원</td>
+                                    <td>Smartstream L3.5 엔진, 원형 LPi 봄베 장착으로 넓은 트렁크 공간 확보</td>
+                                </tr>
+                                <tr>
+                                    <td>3.5 LPi</td>
+                                    <td>익스클루시브 (Exclusive)</td>
+                                    <td>44,080,000 원</td>
+                                    <td>익스클루시브 특화 안전 사양 및 자외선 차단 유리 적용</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="highlight-box">
+                        <strong>옵션 추가 시 변동성 고려:</strong> 위 표에 기재된 금액은 개별소비세 감면 기준 및 제조사 기본 출고가 기준입니다. 캘리그래피 트림에 블랙잉크 디자인 패키지나 파노라마 선루프, 하이테크 패키지 등 추가 선택 품목을 풀옵션으로 적용할 경우 최종 예상 결제 금액은 가솔린 기준 5,000만 원 중반, 하이브리드 기준 5,000만 원 후반대까지 도달할 수 있습니다.
+                    </div>
+                </section>
+
+                <section id="section2">
+                    <h2>2. 그랜저 하이브리드 가격 경제성 비교 시뮬레이션</h2>
+                    <p>그랜저 하이브리드 가격은 가솔린 2.5 모델과 비교했을 때 동일 트림 기준으로 평균 500만 원 이상 비싸게 책정되어 있습니다. 이 때문에 신차를 가입하고 출고하려는 대기 고객들 사이에서는 하이브리드 모델이 실제로 주행 거리 대비 유류비를 얼마나 저렴하게 만들어 주는지, 초기 지불 비용 차액을 상쇄하는 데 몇 년이 걸리는지 치열한 비교 분석이 이어집니다. 디시인사이드, 보배드림, 펨코(에펨코리아) 등 국내 주요 자동차 커뮤니티에서도 하이브리드의 장단점과 연비 이점에 대한 활발한 토론을 쉽게 찾아볼 수 있습니다.</p>
+
+                    <h3>연간 15,000km 주행 시 가솔린 vs 하이브리드 유지비 비교</h3>
+                    <p>아래 분석표는 2026년 기준 전국 평균 휘발유 가격을 리터당 1,700원으로 가정하고, 두 유종 간의 연비와 세금 차이를 수치화하여 비교한 예상 금액 시뮬레이션입니다.</p>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>비교 항목</th>
+                                    <th>그랜저 2.5 가솔린 (익스클루시브)</th>
+                                    <th>그랜저 1.6T 하이브리드 (익스클루시브)</th>
+                                    <th>차이점 및 분석</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>기본 차량 가격</td>
+                                    <td>42,580,000 원</td>
+                                    <td>47,880,000 원</td>
+                                    <td>하이브리드가 5,300,000 원 비쌈</td>
+                                </tr>
+                                <tr>
+                                    <td>공인 복합 연비</td>
+                                    <td>11.7 km/l (18인치 기준)</td>
+                                    <td>18.0 km/l (18인치 기준)</td>
+                                    <td>하이브리드가 리터당 6.3km 더 주행</td>
+                                </tr>
+                                <tr>
+                                    <td>연간 예상 유류비 (1.5만km)</td>
+                                    <td>약 2,179,000 원</td>
+                                    <td>약 1,416,000 원</td>
+                                    <td>매년 유류비 약 763,000 원 절감</td>
+                                </tr>
+                                <tr>
+                                    <td>연간 자동차세 (지방세 포함)</td>
+                                    <td>약 649,000 원</td>
+                                    <td>약 290,000 원</td>
+                                    <td>매년 세금 약 359,000 원 절감</td>
+                                </tr>
+                                <tr>
+                                    <td>연간 총 유지비 (유류+세금)</td>
+                                    <td>약 2,828,000 원</td>
+                                    <td>약 1,706,000 원</td>
+                                    <td>매년 합산 약 1,122,000 원 절약 가능</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>시뮬레이션 분석에 따르면, 차량 가액의 최초 구매 차액인 530만 원은 연간 유지비 절감액인 약 112만 원으로 계산해 보았을 때 약 4.7년 만에 완벽히 회수할 수 있는 것으로 도출됩니다. 만약 평일 출퇴근길 도심 정체 구간 주행이 많거나 연간 주행 거리가 20,000km 이상으로 긴 편이라면 회수 기간은 3년 이내로 대폭 단축됩니다. 뿐만 아니라 공영주차장 50퍼센트 할인 혜택, 남산터널 등 혼잡통행료 면제 혜택 등 저공해 차량 고유의 추가 혜택까지 고려하면 체감하는 만족도는 더욱 커집니다.</p>
+                </section>
+
+                <section id="section3">
+                    <h2>3. 그랜저 트림별 핵심 옵션 및 추천 패키지 장단점</h2>
+                    <p>신차를 구매할 때 가장 많은 고민을 자아내는 단계는 바로 트림과 세부 옵션을 설정하는 과정입니다. 현대자동차의 지능형 안전 기술 패키지인 스마트센스, 서라운드 뷰 모니터링 시스템, 고해상도 헤드업 디스플레이(HUD) 등은 높은 안전성과 편의성을 자랑하지만 모든 옵션을 다 선택하면 견적이 과도하게 높아집니다. 따라서 예산 범위 안에서 만족도를 높일 수 있는 똑똑한 옵션 선택 방법이 필요합니다.</p>
+
+                    <h3>추천 1순위: 가성비를 중시하는 실용주의 조합</h3>
+                    <p>적은 예산으로 최적의 만족도를 내고 싶다면 <strong>2.5 가솔린 프리미엄</strong> 트림에 <strong>헤드업 디스플레이</strong>와 <strong>플래티넘 패키지</strong>를 추가하는 것을 적극 추천합니다. 준대형 세단으로서 갖추어야 할 기본 공간감과 승차감을 완벽히 누리면서도 주행에 꼭 필요한 시인성 및 주차 편의성을 합리적인 가격대에 확보할 수 있는 알짜배기 조합입니다.</p>
+
+                    <h3>추천 2순위: 대부분의 오너가 만족하는 메인스트림 조합</h3>
+                    <p>가장 대중적이고 향후 중고차 판매 시 감가방어에도 제일 유리한 등급은 <strong>익스클루시브</strong> 트림입니다. 익스클루시브 단계부터는 천연가죽 시트와 함께 통풍 및 열선 기능이 완전하게 내장되며, 후측방 충돌 방지 보조 등 고급 안전 기술이 탑재됩니다. 여기에 현대 스마트센스 패키지만 추가로 가입하여 고속도로 주행 보조의 완성도를 높이는 것이 정석으로 통합니다.</p>
+
+                    <h3>추천 3순위: 품격을 극대화한 풀옵션 캘리그래피 및 블랙잉크</h3>
+                    <p>예산 제약이 적고 최상의 안락함을 원한다면 캘리그래피 혹은 전용 블랙 크롬 그릴과 전용 블랙 휠이 들어가는 블랙잉크를 눈여겨보아야 합니다. 수입 프리미엄 브랜드 부럽지 않은 가죽 질감과 오디오 음향, 정숙성을 제공하여 소유주들에게 내돈내산 출고 이후 가장 긍정적인 사용 후기 평판을 듣고 있습니다. 다만 최종 납부해야 할 세금 포함 금액이 크게 증가하므로 신중히 예산을 수립해야 합니다.</p>
+                </section>
+
+                <section id="section4">
+                    <h2>4. 신차 구매 시 필수 부대 비용 계산법: 취등록세 및 이전 등록 비용</h2>
+                    <p>그랜저 가격표상의 순수 차량 가액 외에도 등록 단계에서 무조건 지불해야 하는 행정 비용이 존재합니다. 지방세법에 규정된 승용차 취등록세 요율은 차량 가액의 7퍼센트입니다. 여기에 서울 및 각 지방자치단체 기준에 따른 지하철 채권(도시철도채권 혹은 지역개발채권) 매입 비용이 더해집니다. 채권은 즉시 할인율을 적용하여 매각하는 방식이 보편적이며, 이외에 등록 대행 수수료, 번호판 교부 비용, 인지대 등이 추가로 청구됩니다.</p>
+
+                    <div class="highlight-box">
+                        <strong>하이브리드 친환경 감면 혜택 축소 동향:</strong> 2026년 현재 친환경 차량에 대한 세제 혜택은 이전 대비 축소 적용되는 추세입니다. 감면 대상 조건과 최종 한도액을 미리 파악해 두어야 정확한 출고 견적을 계산할 수 있으므로, 구매 상담 및 컨설팅 진행 시 영업 사원이나 전문 업체의 견적서를 꼼꼼히 대조해 보시기 바랍니다.
+                    </div>
+                </section>
+
+                <section id="section5">
+                    <h2>5. 인터넷 검색 포털 및 AI 비서를 활용한 스마트한 견적 비교</h2>
+                    <p>최근에는 네이버, 구글 등 전통적인 검색엔진뿐만 아니라 유튜브, 인스타그램, 페이스북, 트위터 같은 소셜 미디어 플랫폼과 카카오톡 오픈채팅방, 텔레그램 정보방 등을 통해 비공식 프로모션 할인 정보나 전국 대리점의 실시간 재고 차량 좌표 정보를 공유받는 문화가 자리 잡았습니다. 더 나아가 토스 등 핀테크 앱이나 챗지피티, 제미나이 등 최신 생성형 AI 모델에게 본인의 주행 환경과 가용 자산을 알려주고 맞춤형 월 납입금 추천 계산을 받는 금융 컨설팅을 먼저 받아보는 스마트한 소비자들이 크게 증가하였습니다.</p>
+                    
+                    <p>차량을 인수하는 방식에서도 일반적인 대출 일시불이나 신용카드 할부 외에 보증금 조건과 잔존가치 설정을 변경할 수 있는 장기렌트와 자동차 리스 요금제를 비교해 보는 이들이 많습니다. 장기렌트카의 경우 차량 명의가 렌트사로 등록되므로 매달 납부하는 정액 요금 안에 자동차 보험료와 자동차세 등 유지 비용이 전부 선반영되어 있어 회계 처리가 간편한 장점이 있습니다. 개인 사업자나 법인 고객뿐 아니라 일반 직장인들 사이에서도 세금 할증을 회피하고 사고 이력에 따른 패널티를 예방하는 목적으로 다이렉트 온라인 비교 사이트를 통한 최저가 가입 문의가 잇따르고 있습니다.</p>
+                </section>
+
+                <!-- 실시간 그랜저 모의 견적 계산기 코너 (체류시간 증대 목적의 고도화된 JS 포함) -->
+                <section class="interactive-form" id="calculator-section">
+                    <h3>그랜저 신차 모의 견적 및 연간 세금 계산기</h3>
+                    <p>원하는 엔진과 트림을 선택하시면 2026년 기준 실시간 취등록세 요율을 반영하여 총 소요 금액을 즉시 시뮬레이션해 드립니다.</p>
+                    
+                    <form id="grandeur-calc-form" onsubmit="return false;">
+                        <div class="form-group">
+                            <label for="engine-select">1. 엔진 형식 선택</label>
+                            <select id="engine-select" class="form-control" onchange="updateTrimOptions()">
+                                <option value="2.5">2.5 가솔린 (연 세금 약 65만원)</option>
+                                <option value="1.6H">1.6 터보 하이브리드 (연 세금 약 29만원)</option>
+                                <option value="3.5">3.5 가솔린 (연 세금 약 90만원)</option>
+                                <option value="3.5L">3.5 LPi (연 세금 약 90만원)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="trim-select">2. 세부 트림 선택 (기본가 자동 매칭)</label>
+                            <select id="trim-select" class="form-control" onchange="calculateQuote()">
+                                <!-- 자바스크립트로 옵션 제어 -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="options-val">3. 추가 선택 옵션 총액 (만원 단위 입력)</label>
+                            <input type="number" id="options-val" class="form-control" value="0" min="0" max="1500" oninput="calculateQuote()">
+                            <span style="font-size:0.8rem; color:var(--text-muted);">예: 파노라마 선루프 + 현대스마트센스 = 약 230만원 입력</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="finance-select">4. 희망 구매 방식</label>
+                            <select id="finance-select" class="form-control" onchange="calculateQuote()">
+                                <option value="cash">현금 / 카드 일시불</option>
+                                <option value="installment">일반 전액 할부 (36개월 기준)</option>
+                                <option value="rent">다이렉트 장기렌트 (월 렌탈료 추산)</option>
+                            </select>
+                        </div>
+
+                        <div class="calc-result-box">
+                            <div class="result-row">
+                                <span>선택 차량 기본 가격:</span>
+                                <span id="res-base-price">0 만원</span>
+                            </div>
+                            <div class="result-row">
+                                <span>선택 옵션 총액:</span>
+                                <span id="res-option-price">0 만원</span>
+                            </div>
+                            <div class="result-row">
+                                <span>예상 취등록세 (7% 기준 및 친환경 감면):</span>
+                                <span id="res-tax">0 만원</span>
+                            </div>
+                            <div class="result-row">
+                                <span>최종 인수 실구매 예상 금액:</span>
+                                <span id="res-total-price" style="font-size: 1.15rem; color: var(--secondary);">0 만원</span>
+                            </div>
+                            <div class="result-row" id="monthly-payment-row" style="display:none; color: var(--success);">
+                                <span>예상 월 납입 비용:</span>
+                                <span id="res-monthly-pay">0 원</span>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+                
+                <section id="summary-section">
+                    <h2>6. 올바른 유통 경로를 통한 저렴한곳 탐색 방법</h2>
+                    <p>그랜저 신차 출고 시 동호회 협력 지점이나 인터넷 성지라고 불리는 대리점 정보 좌표를 수집하여 계약하는 소비자들이 많습니다. 각 딜러마다 제공하는 비공식 현금지원 혜택의 범위나 선팅, 블랙박스 등 신차 패키지 사은품 사양이 제각각 다르기 때문에 무조건 싼곳을 찾기보다 사후 관리가 신뢰할 만한 업체를 통하는 것이 추천됩니다.</p>
+                    
+                    <p>또한 제조사 차원에서 주기적으로 진행하는 연식변경 직전 재고 차량 기본 할인 이벤트 프로모션을 활용하면 기본 가격에서 백만 원 단위 이상의 큰 비용 혜택을 챙길 수 있습니다. 이러한 특판 차량 신청은 선착순 계약금 입금 순으로 배정되므로, 구매 계획이 서있다면 주기적으로 공식 대리점 온라인 뉴스룸이나 카카오톡 채널 소식을 모니터링해 두는 것이 바람직합니다.</p>
+                </section>
+            </main>
+
+            <aside class="sidebar">
+                <div class="sidebar-widget">
+                    <h3 style="margin-top:0; border-left-color: var(--secondary);">실시간 인기 검색어</h3>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">그랜저와 함께 많이 찾는 카테고리 테마 분석</p>
+                    <ul class="styled-list" style="font-size:0.85rem; padding-left:15px;">
+                        <li>그랜저 하이브리드 연비 실측</li>
+                        <li>그랜저 하이브리드 세제혜택 범위</li>
+                        <li>그랜저 중고차 시세 감가상각율</li>
+                        <li>그랜저 장기렌트 무보증 승인 조건</li>
+                        <li>그랜저 리스 요금제 비교</li>
+                        <li>그랜저 옵션 스마트센스 작동법</li>
+                        <li>그랜저 차량 세금 연납 할인 방법</li>
+                        <li>그랜저 블랙잉크 전용 색상 차이점</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3 style="margin-top:0; border-left-color: var(--secondary);">체크리스트</h3>
+                    <p style="font-size:0.85rem; line-height:1.6;">신차 가입 및 구매 신청 전 반드시 점검해야 할 3요소</p>
+                    <ol style="font-size:0.85rem; padding-left:15px; line-height:1.7;">
+                        <li style="margin-bottom:8px;">자신의 연간 평균 주행 거리를 계산하여 가솔린과 하이브리드 유종 선택하기</li>
+                        <li style="margin-bottom:8px;">할부 금리와 장기렌트 이자 요금 수수료 비교하기</li>
+                        <li style="margin-bottom:8px;">계약 전 재고 특판 이벤트 상품권 사은품 지급 가능 여부 체크하기</li>
+                    </ol>
+                </div>
+            </aside>
+
+        </div>
+
+        <section class="external-links">
+            <h3 style="margin-top:0; border-left:none; padding-left:0; color:var(--primary);">신뢰할 수 있는 공인 기관 및 유용한 외부 자료</h3>
+            <p style="font-size:0.9rem;">그랜저 가격, 공인 세금 정보 및 친환경 세제 혜택 등 법적 효력을 가진 공인 참고 자료 리스트입니다.</p>
+            <ul>
+                <li><a href="https://directmcheckz.koreahankang.com" target="_blank" rel="noopener">Reliabledone 자동차 구매비용 및 지방세 금융 계산 시뮬레이션 서비스</a></li>
+                <li><a href="https://namu.wiki/w/%ED%98%84%EB%8C%80%20%EA%B7%B8%EB%9E%9C%EC%A0%80" target="_blank" rel="noopener">나무위키: 현대 그랜저 변천사 및 세대별 역사 해설</a></li>
+                <li><a href="https://www.car365.go.kr/" target="_blank" rel="noopener">국토교통부 자동차365: 신차 등록 비용 및 공채 매입 요율 조회 통합 포털</a></li>
+            </ul>
+        </section>
+    </div>
+
+
+    <script>
+        // 엔진 형식별 트림 기본가 매칭을 위한 원천 데이터베이스 구축
+        const carDb = {
+            "2.5": [
+                { name: "프리미엄", price: 3768 },
+                { name: "익스클루시브", price: 4258 },
+                { name: "캘리그래피", price: 4638 }
+            ],
+            "1.6H": [
+                { name: "프리미엄 (하이브리드)", price: 4298 },
+                { name: "익스클루시브 (하이브리드)", price: 4788 },
+                { name: "캘리그래피 (하이브리드)", price: 5168 }
+            ],
+            "3.5": [
+                { name: "프리미엄 (3.5 가솔린)", price: 4018 },
+                { name: "익스클루시브 (3.5 가솔린)", price: 4508 },
+                { name: "캘리그래피 (3.5 가솔린)", price: 4888 }
+            ],
+            "3.5L": [
+                { name: "프리미엄 (3.5 LPi)", price: 3918 },
+                { name: "익스클루시브 (3.5 LPi)", price: 4408 }
+            ]
+        };
+
+        function updateTrimOptions() {
+            const engineType = document.getElementById("engine-select").value;
+            const trimSelect = document.getElementById("trim-select");
+            trimSelect.innerHTML = "";
+
+            carDb[engineType].forEach(trim => {
+                const opt = document.createElement("option");
+                opt.value = trim.price;
+                opt.textContent = trim.name + " (" + trim.price.toLocaleString() + "만원)";
+                trimSelect.appendChild(opt);
+            });
+
+            calculateQuote();
+        }
+
+        function calculateQuote() {
+            const engineType = document.getElementById("engine-select").value;
+            const trimPrice = parseInt(document.getElementById("trim-select").value) || 0;
+            const optionPrice = parseInt(document.getElementById("options-val").value) || 0;
+            const purchaseMethod = document.getElementById("finance-select").value;
+
+            const vehicleSum = trimPrice + optionPrice;
+            
+            // 취등록세 계산 (일반 가솔린/LPi 7%, 하이브리드는 친환경차 40만원 한도 감면 적용)
+            let taxRate = 0.07;
+            let tax = Math.round(vehicleSum * taxRate);
+            
+            if (engineType === "1.6H") {
+                tax = tax - 40; // 40만원 감면 혜택 적용
+                if (tax < 0) tax = 0;
+            }
+
+            const totalInflow = vehicleSum + tax;
+
+            // 결과 화면 뿌려주기
+            document.getElementById("res-base-price").textContent = trimPrice.toLocaleString() + " 만원";
+            document.getElementById("res-option-price").textContent = optionPrice.toLocaleString() + " 만원";
+            document.getElementById("res-tax").textContent = tax.toLocaleString() + " 만원";
+            document.getElementById("res-total-price").textContent = totalInflow.toLocaleString() + " 만원";
+
+            const monthlyRow = document.getElementById("monthly-payment-row");
+            const monthlyLabel = document.getElementById("res-monthly-pay");
+
+            if (purchaseMethod === "installment") {
+                // 연이율 5.5% 적용 36개월 균등 상환 대략 계산식
+                const loanAmount = totalInflow * 10000;
+                const monthlyRate = 0.055 / 12;
+                const numPayments = 36;
+                const monthlyPayment = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / (Math.pow(1 + monthlyRate, numPayments) - 1);
+                
+                monthlyRow.style.display = "flex";
+                monthlyLabel.textContent = "약 " + Math.round(monthlyPayment).toLocaleString() + " 원 (36개월)";
+            } else if (purchaseMethod === "rent") {
+                // 장기렌트 임의 시뮬레이션 요율 계산
+                const monthlyRentEst = Math.round((totalInflow * 10000 * 0.015));
+                monthlyRow.style.display = "flex";
+                monthlyLabel.textContent = "약 " + monthlyRentEst.toLocaleString() + " 원/월 (정액)";
+            } else {
+                monthlyRow.style.display = "none";
+            }
+        }
+
+        // 초기 화면 구동 시 실행
+        window.onload = function() {
+            updateTrimOptions();
+        };
+    </script>
+  
